@@ -1,15 +1,15 @@
 {
   "name": "tween.js",
-  "description": "Super simple, fast and easy to use tweening engine which incorporates optimised Robert Penner's equations.",
-  "version": "0.0.0-development",
+  "description": "A derivative of the TweenJS from https://github.com/tweenjs/tween.js library that incorporates play and pause methods",
+  "version": "1.0.0",
   "main": "src/Tween.js",
-  "homepage": "https://github.com/tweenjs/tween.js",
+  "homepage": "https://github.com/CasualBot/tween.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tweenjs/tween.js.git"
+    "url": "https://github.com/CasualBot/tween.js.git"
   },
   "bugs": {
-    "url": "https://github.com/tweenjs/tween.js/issues"
+    "url": "https://github.com/CasualBot/tween.js/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -24,7 +24,7 @@
 	"test-style": "jscs --config $(pwd)/test/jscs.json $(pwd)/src/Tween.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "author": "tween.js contributors (https://github.com/tweenjs/tween.js/graphs/contributors)",
+  "author": "Casualbot",
   "devDependencies": {
     "jscs": "^2.2.0",
     "jshint": "^2.8.0",

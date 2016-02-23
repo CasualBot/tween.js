@@ -21,7 +21,7 @@
 
 	if ('now' in window.performance === false) {
 		var offset = window.performance.timing && window.performance.timing.navigationStart ? window.performance.timing.navigationStart
-		                                                                                    : Date.now();
+				: Date.now();
 
 		window.performance.now = function () {
 			return Date.now() - offset;
@@ -29,67 +29,69 @@
 	}
 
 })();
+var _paused = false;
+var _pauseStart = null;
 
 var TWEEN = TWEEN || (function () {
 
-	var _tweens = [];
+			var _tweens = [];
 
-	return {
+			return {
 
-		getAll: function () {
+				getAll: function () {
 
-			return _tweens;
+					return _tweens;
 
-		},
+				},
 
-		removeAll: function () {
+				removeAll: function () {
 
-			_tweens = [];
+					_tweens = [];
 
-		},
+				},
 
-		add: function (tween) {
+				add: function (tween) {
 
-			_tweens.push(tween);
+					_tweens.push(tween);
 
-		},
+				},
 
-		remove: function (tween) {
+				remove: function (tween) {
 
-			var i = _tweens.indexOf(tween);
+					var i = _tweens.indexOf(tween);
 
-			if (i !== -1) {
-				_tweens.splice(i, 1);
-			}
+					if (i !== -1) {
+						_tweens.splice(i, 1);
+					}
 
-		},
+				},
 
-		update: function (time) {
+				update: function (time) {
 
-			if (_tweens.length === 0) {
-				return false;
-			}
+					if (_tweens.length === 0) {
+						return false;
+					}
 
-			var i = 0;
+					var i = 0;
 
-			time = time !== undefined ? time : window.performance.now();
+					time = time !== undefined ? time : window.performance.now();
 
-			while (i < _tweens.length) {
+					while (i < _tweens.length) {
 
-				if (_tweens[i].update(time)) {
-					i++;
-				} else {
-					_tweens.splice(i, 1);
+						if (_tweens[i].update(time)) {
+							i++;
+						} else {
+							_tweens.splice(i, 1);
+						}
+
+					}
+
+					return true;
+
 				}
+			};
 
-			}
-
-			return true;
-
-		}
-	};
-
-})();
+		})();
 
 TWEEN.Tween = function (object) {
 
@@ -155,12 +157,6 @@ TWEEN.Tween = function (object) {
 
 			}
 
-			// If `to()` specifies a property that doesn't exist in the source object,
-			// we should not set that property in the object
-			if (_valuesStart[property] === undefined) {
-				continue;
-			}
-
 			_valuesStart[property] = _object[property];
 
 			if ((_valuesStart[property] instanceof Array) === false) {
@@ -173,6 +169,29 @@ TWEEN.Tween = function (object) {
 
 		return this;
 
+	};
+
+	this.pause = function () {
+		if(_paused)
+			return;
+
+		_paused = true;
+		_pauseStart = new Date().getTime();
+
+		TWEEN.remove( this );
+	};
+
+	this.play = function () {
+		if(!_paused)
+			return;
+
+		_paused = false;
+
+		now = new Date().getTime();
+
+		_startTime += now - _pauseStart;
+
+		TWEEN.add( this );
 	};
 
 	this.stop = function () {
@@ -299,11 +318,6 @@ TWEEN.Tween = function (object) {
 
 		for (property in _valuesEnd) {
 
-			// Don't update properties that do not exist in the source object
-			if (_valuesStart[property] === undefined) {
-				continue;
-			}
-
 			var start = _valuesStart[property] || 0;
 			var end = _valuesEnd[property];
 
@@ -315,12 +329,7 @@ TWEEN.Tween = function (object) {
 
 				// Parses relative end values with start as base (e.g.: +10, -3)
 				if (typeof (end) === 'string') {
-
-					if (end.startsWith('+') || end.startsWith('-')) {
-						end = start + parseFloat(end, 10);
-					} else {
-						end = parseFloat(end, 10);
-					}
+					end = start + parseFloat(end, 10);
 				}
 
 				// Protect against non numeric properties.
@@ -875,12 +884,12 @@ TWEEN.Interpolation = {
 			return TWEEN;
 		});
 
-	} else if (typeof module !== 'undefined' && typeof exports === 'object') {
+	} else if (typeof exports === 'object') {
 
 		// Node.js
 		module.exports = TWEEN;
 
-	} else if (root !== undefined) {
+	} else {
 
 		// Global variable
 		root.TWEEN = TWEEN;
