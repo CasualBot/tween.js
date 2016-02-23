@@ -2,11 +2,6 @@
 
 JavaScript tweening engine for easy animations, incorporating optimised Robert Penner's equations.
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Travis tests][travis-image]][travis-url]
-[![Flattr this][flattr-image]][flattr-url]
-
 ```javascript
 var coords = { x: 0, y: 0 };
 var tween = new TWEEN.Tween(coords)
