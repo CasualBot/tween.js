@@ -1,7 +1,7 @@
 {
   "name": "tweenjs-play-pause",
   "description": "A derivative of the TweenJS from https://github.com/tweenjs/tween.js library that incorporates play and pause methods",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "src/Tween.js",
   "homepage": "https://github.com/CasualBot/tween.js",
   "repository": {
