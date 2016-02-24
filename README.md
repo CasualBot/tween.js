@@ -1,6 +1,6 @@
 # Tween-Play-Pause
 
-This is a derivative of the [Tween.JS](https://github.com/tweenjs/tween.js) library by sole on [Github.com](https://github.com/tweenjs/tween.js).
+This is a derivative of the [Tween.JS](https://github.com/tweenjs/tween.js) library by [Sole](https://github.com/sole) on [Github.com](https://github.com/tweenjs/tween.js).
 For more documentation head over to their repository.
 
 JavaScript tweening engine for easy animations, incorporating optimised Robert Penner's equations.
